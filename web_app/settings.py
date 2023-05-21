@@ -27,7 +27,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     'localhost',
-    'webserver',
     '0.0.0.0',
     '127.0.0.1',
     'myagent-production.up.railway.app']

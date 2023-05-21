@@ -1,6 +1,7 @@
+PORT ?= 8000
 start:
 	supervisord
-	python manage.py runserver 0.0.0.0:8000
+	gunicorn --bind 0.0.0.0:$(PORT) web_app.wsgi
 
 setup:
 	pip install -r requirements.txt
