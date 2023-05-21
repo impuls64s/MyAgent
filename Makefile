@@ -1,4 +1,5 @@
 start:
+	supervisord
 	python manage.py runserver
 
 setup:
