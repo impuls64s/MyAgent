@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+from typing import List
 
 from telethon.sync import TelegramClient, events
 
@@ -31,7 +32,7 @@ class BasicSearchBot:
         self.session = session_name
 
     @staticmethod
-    def phrase_search(text: str, words: list[str]) -> list:
+    def phrase_search(text: str, words: List[str]) -> list:
         result = [word for word in words if word.lower() in text.lower()]
         return result
 
