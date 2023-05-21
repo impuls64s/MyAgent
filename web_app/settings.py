@@ -26,18 +26,14 @@ SECRET_KEY = 'django-insecure-m8gm5wkuz$fwjch*$tk=9usi78!gh7jjf!9ychvx#7-#pycn8)
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [
-    'localhost',
-    '0.0.0.0',
-    '127.0.0.1',
-    'myagent-production.up.railway.app']
+ALLOWED_HOSTS = ['*']
 
-CSRF_TRUSTED_ORIGINS = [
-    'https://*.railway.app',
-    'https://127.0.0.1',
-    'https://0.0.0.0',
-    'https://localhost',
-]
+# CSRF_TRUSTED_ORIGINS = [
+#     'https://*.railway.app',
+#     'https://127.0.0.1',
+#     'https://0.0.0.0',
+#     'https://localhost',
+# ]
 
 # Application definition
 
@@ -48,14 +44,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'whitenoise.runserver_nostatic',
     'web_app.tables.apps.TablesConfig',
     'bootstrap4',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -130,13 +124,10 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-# STATIC_URL = 'static/'
-# STATIC_ROOT = BASE_DIR / 'staticfiles'
-# STATICFILES_DIRS = [BASE_DIR / 'static']
+STATIC_URL = 'static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATICFILES_DIRS = [BASE_DIR / 'static']
 
-STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-STATICFILES_STORAGE="whitenoise.storage.CompressedManifestStaticFilesStorage"
  
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
