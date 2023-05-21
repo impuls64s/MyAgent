@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% block content %}
+  <h2>Действия</h2>
+  <div class="row m-3">
+    <div class="col-md-3">
+      <form method="POST">
+          {% csrf_token %}
+          {% bootstrap_field form.tg_user_id layout='horizontal' placeholder='Telegram User ID' show_label=False field_class='text-center' %}
+    </div>
+    <div class="col-md-4">
+        <button type="submit" class="btn btn-success">Добавить</button>
+      </form>
+    </div>
+  </div>
+  
+  
+  <table class="table table-striped text-center">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Username</th>
+        <th>User ID</th>
+        <th>Действия</th>
+      </tr>
+     </thead>
+     <tbody>
+      {% for usr in blocked_users %}
+        <tr>
+          <th>{{ usr.pk }}</th>
+          <td>{{ usr.tg_username }}</td>
+          <td>{{ usr.tg_user_id }}</td>
+          <td>
+            <a href="{% url 'del_blocked_user' usr.pk %}" class="btn btn-danger btn-sm d-inline">Простить грехи</a>
+          </td>
+        </tr>
+      {% endfor %}
+     </tbody>
+  </table>
+
+{% endblock %}

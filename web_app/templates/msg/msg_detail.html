@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% block content %}
+
+  <div class="card">
+    <div class="card-header bg-secondary text-white">
+      <h2>Детали сообщения</h2>
+    </div>
+    <div class="card-body bg-light">
+      <p>ID: {{ message.pk }}</p>
+      <hr>
+      <div class="container">
+        <div class="row p-1">
+          <div class="col">Сессия:</div>
+          <div class="col">{{ message.session }}</div>
+        </div>
+        <div class="row p-1">
+          <div class="col">Отправитель:</div>
+          <div class="col">{{ message.first_name }} {{message.last_name}}</div>
+        </div>
+        <div class="row p-1">
+          <div class="col">Username:</div>
+          <div class="col">{{ message.username }}</div>
+        </div>
+        <div class="row p-1">
+          <div class="col">Telegram User ID:</div>
+          <div class="col">{{ message.tg_user_id }}</div>
+        </div>
+        <div class="row p-1">
+          <div class="col">Номер:</div>
+          <div class="col">{{ message.phone }}</div>
+        </div>
+        <div class="row p-1">
+          <div class="col">Ссылка на сообщение:</div>
+          <div class="col">{{ message.url_message }}</div>
+        </div>
+        <div class="row p-1">
+          <div class="col">Дата отправки:</div>
+          <div class="col">{{ message.created_at }}</div>
+        </div>
+        <div class="row p-1">
+          <div class="col">
+            <h6>Вошедшие фразы:</h6>
+            <p>{{ message.phrase }}</p>
+          </div>
+        </div>
+        <div class="row p-1">
+          <div class="col">
+            <h6>Сообщение:</h6>
+            <p>{{ message.message }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

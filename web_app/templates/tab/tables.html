@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% block content %}
+<h2>Действия</h2>
+<div class="row my-4">
+  <div class="col-md-5">
+    <form method="POST">
+        {% csrf_token %}
+        {% bootstrap_field form.name layout='horizontal'%}
+        <div class="my-2">
+        {% bootstrap_field form.description layout='horizontal' %}
+        </div>
+  </div>
+  <div class="col-md-2">
+        <button type="submit" class="btn btn-success">Добавить</button>
+  </div>
+    </form>
+  
+
+  <div class="col-md-3">
+    <form method="POST" action="{% url 'del_table' %}">
+        {% csrf_token %}
+        <select required class="form-select" aria-label="Default select example" name="table_id">
+            <option value disabled selected>Выберете таблицу</option>
+            {% for table in tables %}
+                <option value="{{ table.pk }}">{{table.name}}</option>
+            {% endfor %}
+        </select>
+  </div>
+    <div class="col-md-2">
+        <button type="submit" class="btn btn-danger">Удалить</button>
+    </div>
+    </form>
+
+
+<h2>Таблицы</h2>
+<div class="row my-4">
+  <div class="col">
+    <ul class="list-group list-group-horizontal flex-wrap">
+      {% for table in tables %}
+      <div class="col-md-4">
+        <a href="{% url 'phrases_view' table.pk %}" class="list-group-item list-group-item-action">
+          <li class="d-flex justify-content-between align-items-start">
+            <div class="ms-2 me-auto">
+              <div class="fw-bold">{{ table.name }}</div>
+              {{ table.description }}
+            </div>
+            <span class="badge bg-info rounded-pill ms-2">{{table.tab_phrases.count}}</span>
+          </li>
+        </a>
+      </div>
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+  
+{% endblock %}

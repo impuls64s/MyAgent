@@ -1,0 +1,24 @@
+{% block navigation %}
+<div class="d-flex flex-column flex-md-row align-items-center pb-3 mb-4 border-bottom">
+    <a href="/" class="d-flex align-items-center link-body-emphasis text-decoration-none">
+      <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="blue" class="bi bi-check-circle-fill" viewBox="0 0 16 16">
+        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+      </svg>
+      <span class="fs-4 mx-2">Мой агент</span>
+    </a>
+
+    <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
+      {% if user.is_authenticated %}
+        <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="{% url 'view_bots' %}">Боты</a>
+        <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="{% url 'tables_view' %}">Таблицы</a>
+        <a class="me-3 py-2 link-body-emphasis text-decoration-none" target="_blank" href="http://127.0.0.1:9001/">Диспетчер</a>
+        <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="{% url 'view_messages' %}">Сообщения</a>
+        <a href="{% url 'logout' %}" class="btn btn-danger me-2">Выход</a>
+      {% else %}
+        <a href="{% url 'login' %}" class="btn btn-outline-primary me-2">Войти</a>
+        <a href="/" class="btn btn-primary me-2">Регистрация</a>
+      {% endif %}
+
+    </nav>
+</div>
+{% endblock %}

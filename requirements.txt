@@ -1,0 +1,4 @@
+Django==4.2.1
+Telethon==1.28.5
+supervisor==4.2.5
+django-bootstrap4==23.1

@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h2>Список ботов</h2>
+  <div class="text-start">
+    <p>
+      Прежде чем создать бота, создайте 2 таблицы:
+      <ul>
+        <li>Ключевы фразы - фразы или слова, которые должны присутсвовать во входящем сообщении.</li>
+        <li>Фразы исключения - фразы или слова, которые не должны проходить валидацию.</li>
+      </ul>
+      Далее добавьте в свой телеграмм аккаунт чаты/группы/пользователей чьи сообщения хотите фильтровать.<br>
+    </p>
+    <p>Когда все будет готово, вы можете --> <a href="{% url 'create_bot' %}" class="btn btn-success btn-sm d-inline">создать бота</a></p>
+  </div>
+  <table class="table table-striped text-center">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Сессия</th>
+        <th>Номер</th>
+        <th>Получатель</th>
+        <th>Активация</th>
+        <th>Действия</th>
+      </tr>
+     </thead>
+     <tbody>
+      {% for bot in bots %}
+        <tr>
+          <th>{{ bot.pk }}</th>
+          <td>{{ bot.session_name }}</td>
+          <td>{{ bot.phone }}</td>
+          <td>{{ bot.recipient }}</td>
+          {% if bot.activated %}
+            <td class="text-success">Пройдена</td>
+            <td><a href="{% url 'del_bot' bot.pk %}" class="btn btn-danger btn-sm d-inline">Удалить</a></td>
+          {% else %}
+            <td class="text-danger">Не пройдена</td>
+            <td>
+              <a href="{% url 'send_code' bot.pk %}" class="btn btn-primary btn-sm d-inline">Отправить код</a>
+              <a href="{% url 'edit_bot' bot.pk %}" class="btn btn-primary btn-sm d-inline">Изменить</a>
+              <a href="{% url 'del_bot' bot.pk %}" class="btn btn-danger btn-sm d-inline">Удалить</a>
+            </td>
+          {% endif %}
+        </tr>
+      {% endfor %}
+     </tbody>
+  </table>
+{% endblock %}

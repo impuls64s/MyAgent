@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% block content %}
+  <h2>Действия</h2>
+  <div class="row m-4">
+    <div class="col-md-5">
+      <form method="POST">
+          {% csrf_token %}
+          {% bootstrap_field form.phrase layout='horizontal' placeholder='' %}
+    </div>
+    <div class="col-md-2">
+        <button type="submit" class="btn btn-success">Добавить</button>
+      </form>
+    </div>
+  </div>
+  
+  
+  <table class="table table-striped text-center">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Фраза</th>
+        <th>Таблица</th>
+        <th>Действия</th>
+      </tr>
+     </thead>
+     <tbody>
+      {% for phrase in phrases %}
+        <tr>
+          <th>{{ phrase.pk }}</th>
+          <td>{{ phrase.phrase }}</td>
+          <td>{{ phrase.table }}</td>
+          <td>
+            <a href="{% url 'upd_phrase' phrase.id %}" class="btn btn-primary btn-sm d-inline">Изменить</a>
+            <a href="{% url 'del_phrase' phrase.id %}" class="btn btn-danger btn-sm d-inline">Удалить</a>
+          </td>
+        </tr>
+      {% endfor %}
+     </tbody>
+  </table>
+
+{% endblock %}

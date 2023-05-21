@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% block content %}
+<form method="POST" class="container text-center col-md-5">
+    {% csrf_token %}
+    <div class="mb-4">
+        {% bootstrap_form form label_class='my-4' %}
+    </div>
+    <div class="mt-3">
+      <button type="submit" class="btn btn-success">Обновить фразу</button>
+    </div>
+</form>
+{% endblock %}

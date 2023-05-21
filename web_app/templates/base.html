@@ -1,0 +1,39 @@
+{% load bootstrap4 %}
+{% bootstrap_css %}
+{% bootstrap_javascript jquery='full' %}
+<!doctype html>
+<html lang="en" data-bs-theme="auto">
+  <head>
+    {% load static %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.111.3">
+    <title>{{title}}</title>
+    
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/pricing/">
+    <link href="{% static 'bootstrap.min.css' %}" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="{% static 'pricing.css' %}" rel="stylesheet">
+  </head>
+  <body>
+
+  <div class="container py-3">
+    <header>
+      {% include "navigation.html" %}
+    </header>
+
+    <main>
+      {% if messages %}
+        {% bootstrap_javascript jquery=True %}
+        {% bootstrap_messages %}
+      {% endif %}
+      
+      {% block content %}
+      {% endblock %}
+    </main>
+  </div>
+    
+  </body>
+</html>

@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container text-center">
+  
+  <div class="row">
+    <div class="col">
+      <p>Введите код, отправленный в телеграм аккаунт зарегестрированный по номеру: <b>{{ phone }}</b></p>
+    </div>
+  </div>
+
+  
+  <form method="post" action="{% url 'activate' bot_id %}">
+  {% csrf_token %}
+  <!-- <input type="hidden" name="bot_id" value="{{ bot_id }}"> -->
+  <div class="row justify-content-center">
+    <div class="col-2">
+      <input type="code" name="code" class="form-control" id="code" placeholder="Код">
+    </div>
+    <div class="col-2">
+      <button type="submit" class="btn btn-success">Активировать</button>
+    </div>
+  </form>
+
+</div>
+{% endblock %}
