@@ -19,7 +19,6 @@ from django.urls import path, include
 from .views import index
 
 
-
 urlpatterns = [
     path('', index, name='main_page'),
     path("accounts/", include("django.contrib.auth.urls")),

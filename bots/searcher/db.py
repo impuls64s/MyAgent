@@ -51,10 +51,10 @@ class SQLiteDB:
         return result
 
 
-    def get_blocked_users(self):
+    def get_blocked_users(self, table_name: str):
         self.cursor.execute(f"""
             SELECT tg_user_id
-            FROM tables_blockedusers
+            FROM {table_name}
             """
         )
         result = [row[0] for row in self.cursor.fetchall()]

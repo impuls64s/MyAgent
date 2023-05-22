@@ -33,8 +33,7 @@ def create_py(data: dict) -> None:
 def create_conf(name):
     config = configparser.ConfigParser()
     config[f'program:bot_{name}'] = {
-                        'command': f'.venv/bin/python bots/bot_{name}.py',
-                        'directory': '/home/impuls_64/agency/',
+                        'command': f'python3 bots/bot_{name}.py',
                         'environment': 'PYTHONUNBUFFERED=1',
                         'autostart': 'false',
                         'stdout_logfile': f'logs/bot_{name}.log',
