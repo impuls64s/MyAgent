@@ -7,6 +7,7 @@
       <form method="POST">
           {% csrf_token %}
           {% bootstrap_field form.tg_user_id layout='horizontal' placeholder='Telegram User ID' show_label=False field_class='text-center' %}
+          <input type="hidden" name="owner" value="{{user.pk}}">
     </div>
     <div class="col-md-4">
         <button type="submit" class="btn btn-success">Добавить</button>

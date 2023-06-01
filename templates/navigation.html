@@ -11,14 +11,16 @@
       {% if user.is_authenticated %}
         <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="{% url 'view_bots' %}">Боты</a>
         <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="{% url 'tables_view' %}">Таблицы</a>
-        <a class="me-3 py-2 link-body-emphasis text-decoration-none" target="_blank" href="http://127.0.0.1:9001/">Диспетчер</a>
+        {% if user.is_superuser %}
+          <a class="me-3 py-2 link-body-emphasis text-decoration-none" target="_blank" href="http://127.0.0.1:9001/">Диспетчер</a>
+        {% endif %}
         <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="{% url 'view_messages' %}">Сообщения</a>
         <a href="{% url 'logout' %}" class="btn btn-danger me-2">Выход</a>
       {% else %}
         <a href="{% url 'login' %}" class="btn btn-outline-primary me-2">Войти</a>
-        <a href="/" class="btn btn-primary me-2">Регистрация</a>
+        <a href="{% url 'create_user' %}" class="btn btn-primary me-2">Регистрация</a>
       {% endif %}
-
+      
     </nav>
 </div>
 {% endblock %}

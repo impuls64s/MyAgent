@@ -17,14 +17,15 @@
     <!-- Custom styles for this template -->
     <link href="{% static 'pricing.css' %}" rel="stylesheet">
   </head>
+  
   <body>
-
   <div class="container py-3">
     <header>
       {% include "navigation.html" %}
     </header>
-
+    
     <main>
+      
       {% if messages %}
         {% bootstrap_javascript jquery=True %}
         {% bootstrap_messages %}

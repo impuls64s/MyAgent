@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% block content %}
+<h1 class="display-6 text-center">Вход</h1>
+  <div class="row justify-content-md-center p-3">
+    <div class="col-4">
+      <form method="post">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        <div class="d-grid gap-2 col-8 mx-auto">
+          <button type="submit" class="btn btn-primary btn-block my-2">Войти</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+{% endblock %}

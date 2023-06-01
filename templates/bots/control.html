@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="card">
+    
+    <div class="card-header bg-secondary text-white">
+      <h2>Панель управления</h2>
+    </div>
+    
+    <div class="card-body bg-light">
+      <p><b class="font-monospace">ID:</b> {{ bot.pk }}</p>
+      <hr>
+      <div class="container">
+        <div class="row p-1">
+            
+            <div class="col">
+                <ul>
+                    <li class="list-group-item p-1">
+                        <b class="font-monospace">Активация:</b> 
+                        {% if bot.activated %}
+                            ✅
+                        {% else %}
+                            ❌
+                        {% endif %}
+                    </li>
+                    <li class="list-group-item p-1"><b class="font-monospace">API ID:</b> {{bot.api_id}}</li>
+                    <li class="list-group-item p-1"><b class="font-monospace">API HASH:</b> {{bot.api_hash}}</li>
+                    <li class="list-group-item p-1"><b class="font-monospace">Номер:</b> {{bot.phone}}</li>
+                    <li class="list-group-item p-1"><b class="font-monospace">Сессия:</b> {{bot.session_name}}</li>
+                    <li class="list-group-item p-1"><b class="font-monospace">Получатель:</b> {{bot.recipient}}</li>
+                    <li class="list-group-item p-1"><b class="font-monospace">Ключевые фразы:</b> {{bot.keywords_table}}</li>
+                    <li class="list-group-item p-1"><b class="font-monospace">Фразы исключения:</b> {{bot.excluded_words_table}}</li>
+                    <li class="list-group-item p-3"><a href="{% url 'del_bot' bot.pk %}" class="btn btn-danger btn-sm d-inline">Удалить бота</a></li>
+                </ul>
+            </div>
+            
+            <div class="col">
+                <ul>
+                    <li class="list-group-item p-1">
+                        <b class="font-monospace">Состояние:</b> 
+                        {% if bot_info.state == 20 %}
+                            <span class="badge badge-pill badge-success">{{bot_info.statename}}</span>
+                        {% else %}
+                        <span class="badge badge-pill badge-danger">{{bot_info.statename}}</span>
+                        {% endif %}
+                    </li>
+                    <li class="list-group-item p-1"><b class="font-monospace">Имя бота:</b> {{bot_info.name}}</li>
+                    <li class="list-group-item p-1"><b class="font-monospace">Описание:</b> {{bot_info.description}}</li>
+                    <li class="list-group-item p-1"><b class="font-monospace">State Code:</b> {{bot_info.state}}</li>
+                    <li class="list-group-item p-1">
+                        <a href='http://127.0.0.1:9001/tail.html?processname={{bot_info.name}}' target="_blank">Log</a> | 
+                        <a href='http://127.0.0.1:9001/logtail/{{bot_info.name}}' target="_blank">Log Online</a> | 
+                        <a href='http://127.0.0.1:9001/logtail/{{bot_info.name}}/stderr' target="_blank">Log Online Error</a>
+                    </li>
+                    <li class="list-group-item p-1">
+                        <form method="post">
+                            {% csrf_token %}
+                            {% if bot_info.state == 0 %}
+                                <button type="submit" name='action' value='start' class="btn btn-success">Запустить</button>
+                            {% endif %}
+                            {% if bot_info.state == 20 %}
+                                <button type="submit" name='action' value='restart' class="btn btn-primary">Перезагрузить</button>
+                                <button type="submit" name='action' value='stop' class="btn btn-danger">Остановить</button>
+                                <button type="submit" name="action" value="clearlog" class="btn btn-outline-dark">Очистить лог</button>
+                            {% endif %}
+                        </form>
+                    </li>
+                </ul>
+            </div>
+        </div>
+      </div>
+    </div>
+</div>
+
+{% endblock %}

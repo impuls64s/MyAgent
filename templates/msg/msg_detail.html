@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="card">
+
+    <div class="card-header bg-secondary text-white">
+      <h2>Детали сообщения</h2>
+    </div>
+
+    <div class="card-body bg-light">
+      <p><b class="font-monospace">ID:</b> {{ message.pk }}</p>
+      <hr>
+      <div class="container">
+        <div class="row p-1">
+          
+          <div class="col">
+            <ul>
+              <li class="list-group-item p-1"><b class="font-monospace">Вошедшие фразы:</b></li>
+              <p>{{ message.phrase }}</p>
+              <h6>Сообщение:</h6>
+              <p>{{ message.message }}</p>
+            </ul>
+          </div>
+          
+          <div class="col">
+            <ul>
+              <li class="list-group-item p-1"><b class="font-monospace">Имя бота:</b> {{ message.session }}</li>
+              <li class="list-group-item p-1"><b class="font-monospace">Отправитель:</b> {{ message.first_name }} {{message.last_name}}</li>
+              <li class="list-group-item p-1"><b class="font-monospace">Username:</b> {{ message.username }}</li>
+              <li class="list-group-item p-1"><b class="font-monospace">Telegram User ID:</b> {{ message.tg_user_id }}</li>
+              <li class="list-group-item p-1"><b class="font-monospace">Номер:</b> {{ message.phone }}</li>
+              <li class="list-group-item p-1"><b class="font-monospace">Ссылка на сообщение:</b> {{ message.url_message }}</li>
+              <li class="list-group-item p-1"><b class="font-monospace">Дата отправки:</b> {{ message.created_at }}</li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </div>
+</div>
+
+{% endblock %}

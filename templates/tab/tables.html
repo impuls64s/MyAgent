@@ -5,13 +5,14 @@
 <div class="row my-4">
   <div class="col-md-5">
     <form method="POST">
+        <input type="hidden" name="owner" value="{{ user.pk }}">
         {% csrf_token %}
         {% bootstrap_field form.name layout='horizontal'%}
         <div class="my-2">
         {% bootstrap_field form.description layout='horizontal' %}
         </div>
   </div>
-  <div class="col-md-2">
+  <div class="col-md-2"> 
         <button type="submit" class="btn btn-success">Добавить</button>
   </div>
     </form>
@@ -33,7 +34,7 @@
     </form>
 
 
-<h2>Таблицы</h2>
+<h2>Таблицы: {{ user }}</h2>
 <div class="row my-4">
   <div class="col">
     <ul class="list-group list-group-horizontal flex-wrap">

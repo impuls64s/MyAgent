@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 
 class Table(models.Model):
@@ -9,6 +10,7 @@ class Table(models.Model):
         max_length=75,
         verbose_name='Описание',
         blank=True)
+    owner = models.ForeignKey(User, on_delete=models.CASCADE)
 
     class Meta:
         verbose_name = 'Таблица'
@@ -21,7 +23,6 @@ class Table(models.Model):
 class Phrase(models.Model):
     phrase = models.CharField(
         max_length=100,
-        unique=True,
         verbose_name='Фраза')
     table = models.ForeignKey(
         Table,
@@ -29,6 +30,7 @@ class Phrase(models.Model):
         related_name='tab_phrases')
 
     class Meta:
+        unique_together = ('phrase', 'table')
         verbose_name = 'Фраза'
         verbose_name_plural = 'Фразы'
 
@@ -46,6 +48,7 @@ class BlockedUsers(models.Model):
         max_length=100,
         blank=True,
         null=True)
+    owner = models.ForeignKey(User, on_delete=models.CASCADE)
 
     class Meta:
         verbose_name = 'Заблокированный пользователь'
@@ -65,6 +68,7 @@ class ChatMessage(models.Model):
     username = models.CharField(max_length=100, null=True)
     phone = models.CharField(max_length=100, null=True)
     session = models.CharField(max_length=40)
+    # owner = models.ForeignKey(User, on_delete=models.CASCADE)
     created_at = models.DateTimeField()
 
     class Meta:
@@ -97,6 +101,7 @@ class Bot(models.Model):
         related_name='tab_excluded',
         on_delete=models.PROTECT,
         verbose_name='Фразы исключения')
+    owner = models.ForeignKey(User, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
@@ -105,3 +110,6 @@ class Bot(models.Model):
 
     def __str__(self):
         return f'Сессия: {self.session_name} | Номер: {self.phone}'
+    
+    def get_file_name(self):
+        return f'{self.owner}_{self.session_name}'

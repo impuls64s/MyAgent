@@ -31,10 +31,12 @@
           <td>{{ bot.phone }}</td>
           <td>{{ bot.recipient }}</td>
           {% if bot.activated %}
-            <td class="text-success">Пройдена</td>
-            <td><a href="{% url 'del_bot' bot.pk %}" class="btn btn-danger btn-sm d-inline">Удалить</a></td>
+            <td class="text-success">✅</td>
+            <td>
+              <a href="{% url 'bot_control' bot.pk %}" class="btn btn-primary btn-sm d-inline">Управление</a>
+            </td>
           {% else %}
-            <td class="text-danger">Не пройдена</td>
+            <td class="text-danger">❌</td>
             <td>
               <a href="{% url 'send_code' bot.pk %}" class="btn btn-primary btn-sm d-inline">Отправить код</a>
               <a href="{% url 'edit_bot' bot.pk %}" class="btn btn-primary btn-sm d-inline">Изменить</a>
