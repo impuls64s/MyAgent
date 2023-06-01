@@ -68,7 +68,6 @@ class ChatMessage(models.Model):
     username = models.CharField(max_length=100, null=True)
     phone = models.CharField(max_length=100, null=True)
     session = models.CharField(max_length=40)
-    # owner = models.ForeignKey(User, on_delete=models.CASCADE)
     created_at = models.DateTimeField()
 
     class Meta:
