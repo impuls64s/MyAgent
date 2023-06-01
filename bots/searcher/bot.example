@@ -9,10 +9,10 @@ def main():
         recipient='RECIPIENT',
         db_name='db.sqlite3',
         tables=Tables(
-            messages='tables_chatmessage',
+            messages='tgparser_chatmessage',
             keywords='KEYWORDS',
             excluded_words='EXCLUDED_WORDS',
-            blocked_users='tables_blockedusers'
+            blocked_users='tgparser_blockedusers'
         )
     )
     bot.start_bot()

@@ -44,7 +44,7 @@ class SQLiteDB:
     def get_phrases(self, type_phrase: str):
         self.cursor.execute(f"""
             SELECT phrase
-            FROM tables_phrase
+            FROM tgparser_phrase
             WHERE table_id = ? """, (type_phrase,)
         )
         result = [row[0] for row in self.cursor.fetchall()]

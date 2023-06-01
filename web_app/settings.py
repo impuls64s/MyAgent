@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'web_app.tables.apps.TablesConfig',
+    'web_app.tgparser.apps.TgparserConfig',
     'web_app.users.apps.UsersConfig', 
     'bootstrap4',
 ]

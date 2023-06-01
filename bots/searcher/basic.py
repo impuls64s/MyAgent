@@ -9,9 +9,9 @@ from .db import SQLiteDB
 @dataclass
 class Tables:
     messages: str
-    keywords: str = 'tables_keywords'
-    excluded_words: str = 'tables_excludedwords'
-    blocked_users: str = 'tables_blockedusers'
+    keywords: str = 'tgparser_keywords'
+    excluded_words: str = 'tgparser_excludedwords'
+    blocked_users: str = 'tgparser_blockedusers'
 
 
 class BasicSearchBot:
