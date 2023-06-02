@@ -85,11 +85,21 @@ class Bot(models.Model):
     session_name = models.CharField(
         max_length=40,
         verbose_name='Сессия',
-        unique=True)
-    phone = models.CharField(max_length=30, verbose_name='Номер телефона')
+        unique=True,
+        help_text='Только английские буквы, цифры и _')
+    phone = models.CharField(
+        max_length=30,
+        verbose_name='Номер телефона',
+        help_text='От Telegram аккаунта')
     phone_code_hash = models.CharField(max_length=30, blank=True)
-    password = models.CharField(max_length=10, verbose_name='Пароль')
-    recipient = models.CharField(max_length=30, verbose_name='Получатель')
+    password = models.CharField(
+        max_length=10,
+        verbose_name='Пароль',
+        help_text='Облачный пароль, если его нет то 1234')
+    recipient = models.CharField(
+        max_length=30,
+        verbose_name='Получатель',
+        help_text='Telegram для получения уведомлений без @')
     keywords_table = models.ForeignKey(
         Table,
         related_name='tab_keywords',

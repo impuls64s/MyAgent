@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% block content %}
+
+<div class="text-start">
+  <p>
+    Для получения <b>Api ID</b> и <b>Api Hash</b> пройдите по ссылке <a target='_blank' href='https://my.telegram.org/auth'>my.telegram.org</a> и зарегистрируйте приожение.<br>
+    <b>Важно:</b> номер телефона и IP должны быть одной страны. После успешной активации, изменить бота нельзя.
+  </p>
+</div>
+
+<hr>
+
+<form method="POST" >
+    {% csrf_token %}
+    <input type="hidden" name="owner" value="{{user.pk}}">
+    <div class="mb-3 text-end">
+      {% bootstrap_field form.api_id layout='horizontal' field_class='col-sm-2' placeholder=''%}
+    </div>
+    <div class="mb-3 text-end">
+      {% bootstrap_field form.api_hash layout='horizontal' field_class='col-sm-4' placeholder=''%}
+    </div>
+    <div class="mb-3 text-end">
+      {% bootstrap_field form.session_name layout='horizontal' field_class='col-sm-4' placeholder='my_example'%}
+    </div>
+    <div class="mb-3 text-end">
+      {% bootstrap_field form.phone layout='horizontal' field_class='col-sm-3' placeholder='+7 926 000 00 00'%}
+    </div>
+    <div class="mb-3 text-end">
+      {% bootstrap_field form.password layout='horizontal' field_class='col-sm-2' placeholder='От Telegram'%}
+    </div>
+    <div class="mb-3 text-end">
+      {% bootstrap_field form.recipient layout='horizontal' field_class='col-sm-3' placeholder='Username или User_ID'%}
+    </div>
+    <div class="mb-3 text-end">
+      {% bootstrap_field form.keywords_table layout='horizontal' field_class='col-sm-3'%}
+    </div>
+    <div class="mb-3 text-end">
+      {% bootstrap_field form.excluded_words_table layout='horizontal' field_class='col-sm-3' %}
+    </div>
+    <div class="mb-3 text-center">
+      <button type="submit" class="btn btn-success">{{ button}}</button>
+    </div>
+</form>
+
+{% endblock %}

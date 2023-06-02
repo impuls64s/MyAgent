@@ -14,7 +14,7 @@ from django.db.utils import IntegrityError
 
 
 # Tables
-def tables_view(request):
+def view_tables(request):
     
     # tables = Table.objects.all().filter(owner=request.user)
     if request.user.is_superuser:
@@ -29,7 +29,7 @@ def tables_view(request):
         form = TableForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('tables_view')
+            return redirect('view_tables')
     else:
         form = TableForm()
     context = {'tables': tables, 'form': form, 'title': 'Таблицы', 'user': request.user}
@@ -44,17 +44,17 @@ def del_table(request):
             table.delete()
     except ProtectedError:
         messages.warning(request, 'Нельзя удалить таблицу, так как к ней привязан бот.')
-    return redirect('tables_view')
+    return redirect('view_tables')
 
 
 # Phrases
-def phrases_view(request, table_id):
+def view_phrases(request, table_id):
 
     # Проверка доступа (только владельцы видят свои фразы)
     table = Table.objects.get(pk=table_id)
     if table.owner.pk != request.user.pk and not request.user.is_superuser:
         messages.warning(request, f'Вы не владелец таблицы {table}')
-        return redirect('tables_view')
+        return redirect('view_tables')
 
     if request.method == 'POST':
         form = PhraseForm(request.POST)
@@ -65,7 +65,7 @@ def phrases_view(request, table_id):
                 phrase.save()
             except IntegrityError:
                 messages.warning(request, f'Фраза уже существует')
-            return redirect(reverse('phrases_view', args=[table_id]))
+            return redirect(reverse('view_phrases', args=[table_id]))
     else:
         form = PhraseForm()
     phrases = Phrase.objects.filter(table=table_id)
@@ -78,7 +78,7 @@ def del_phrase(request, phrase_id):
         phrase = Phrase.objects.get(pk=phrase_id)
         tab_id = phrase.table.pk
         phrase.delete()
-    return redirect(reverse('phrases_view', args=[tab_id]))
+    return redirect(reverse('view_phrases', args=[tab_id]))
 
 
 def upd_phrase(request, phrase_id):
@@ -88,7 +88,7 @@ def upd_phrase(request, phrase_id):
         form = PhraseForm(request.POST, instance=phrase)
         if form.is_valid():
             form.save()
-            return redirect(reverse('phrases_view', args=[tab_id]))
+            return redirect(reverse('view_phrases', args=[tab_id]))
     else:
         form = PhraseForm(instance=phrase)
 
@@ -159,6 +159,9 @@ def bot_control(request, bot_id):
             start_bot(bot.get_file_name())
         if request.POST.get('action') == 'stop':
             stop_bot(bot.get_file_name())
+        if request.POST.get('action') == 'restart':
+            stop_bot(bot.get_file_name())
+            start_bot(bot.get_file_name())
         if request.POST.get('action') == 'clearlog':
             clear_log(bot.get_file_name())
         return redirect(reverse('bot_control', args=[bot_id]))
@@ -276,6 +279,6 @@ def activate_bot(request, bot_id):
 
         else:
             create_bot_file(bot)
-            messages.success(request, 'Бот успешно создан, перейдите в <Управление>')
+            messages.success(request, 'Бот успешно создан, перейдите в <Управление> и запустите его.')
 
     return redirect('view_bots')

@@ -35,7 +35,6 @@ class BotForm(forms.ModelForm):
         self.fields['excluded_words_table'].queryset = Table.objects.filter(owner=owner)
 
 
-
 class TableForm(forms.ModelForm):
     class Meta:
         model = Table
